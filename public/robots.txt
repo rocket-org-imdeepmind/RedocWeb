@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://redoc.rocketapi.net
+
+# Sitemaps
+Sitemap: https://redoc.rocketapi.net/sitemap.xml
