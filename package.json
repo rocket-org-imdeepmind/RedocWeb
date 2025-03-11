@@ -1,7 +1,7 @@
 {
   "name": "rocket-redoc",
   "private": false,
-  "version": "v1.0.0",
+  "version": "v1.3.0",
   "type": "module",
   "author": "Abhishek Chatterjee",
   "scripts": {
