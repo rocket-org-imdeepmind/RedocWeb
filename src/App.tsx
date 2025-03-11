@@ -1,159 +1,159 @@
-import { RedocStandalone } from "redoc";
-import { useState } from "react";
+import { RedocStandalone } from 'redoc'
+import { useState } from 'react'
 
-import "./App.css";
+import './App.css'
 
-const RocketLogo = (): JSX.Element => <img src="/public/logo.png" width={80} />;
+const RocketLogo = (): JSX.Element => <img src="/logo.png" width={80} />
 
 const styles = {
   // Layout
   container: {
     fontFamily: '"Inter", sans-serif',
-    maxWidth: "1200px",
-    margin: "0 auto",
-    padding: "0 20px",
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '0 20px'
   },
   header: {
-    display: "flex" as const,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column" as const,
-    padding: "40px 0 30px",
+    display: 'flex' as const,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column' as const,
+    padding: '40px 0 30px'
   },
   branding: {
-    display: "flex" as const,
-    alignItems: "center",
-    marginBottom: "20px",
+    display: 'flex' as const,
+    alignItems: 'center',
+    marginBottom: '20px'
   },
   content: {
-    display: "flex" as const,
-    flexDirection: "column" as const,
-    alignItems: "center",
-    maxWidth: "600px",
-    margin: "0 auto 40px",
-    textAlign: "center" as const,
+    display: 'flex' as const,
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    maxWidth: '600px',
+    margin: '0 auto 40px',
+    textAlign: 'center' as const
   },
   card: {
-    backgroundColor: "#f8f9fa",
-    borderRadius: "8px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
-    padding: "40px",
-    width: "100%",
-    marginTop: "30px",
+    backgroundColor: '#f8f9fa',
+    borderRadius: '8px',
+    boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
+    padding: '40px',
+    width: '100%',
+    marginTop: '30px'
   },
   // Typography
   title: {
-    fontSize: "36px",
+    fontSize: '36px',
     fontWeight: 600,
-    color: "#fb2645",
-    margin: "0 0 0 12px",
+    color: '#fb2645',
+    margin: '0 0 0 12px'
   },
   subTitle: {
-    fontSize: "22px",
+    fontSize: '22px',
     fontWeight: 500,
-    color: "#333",
-    margin: "0 0 24px 0",
+    color: '#333',
+    margin: '0 0 24px 0'
   },
   text: {
-    fontSize: "16px",
-    lineHeight: "24px",
-    color: "#555",
-    margin: "0 0 24px 0",
+    fontSize: '16px',
+    lineHeight: '24px',
+    color: '#555',
+    margin: '0 0 24px 0'
   },
   link: {
-    color: "#fb2645",
-    textDecoration: "none",
-    fontWeight: 500,
+    color: '#fb2645',
+    textDecoration: 'none',
+    fontWeight: 500
   },
   // Form elements
   inputGroup: {
-    display: "flex" as const,
-    width: "100%",
-    marginTop: "20px",
+    display: 'flex' as const,
+    width: '100%',
+    marginTop: '20px'
   },
   input: {
     flex: 1,
-    padding: "12px 16px",
-    fontSize: "16px",
-    borderRadius: "4px 0 0 4px",
-    border: "1px solid #ddd",
-    borderRight: "none",
-    outline: "none",
-    transition: "border-color 0.2s",
+    padding: '12px 16px',
+    fontSize: '16px',
+    borderRadius: '4px 0 0 4px',
+    border: '1px solid #ddd',
+    borderRight: 'none',
+    outline: 'none',
+    transition: 'border-color 0.2s'
   },
   button: {
-    backgroundColor: "#fb2645",
-    color: "white",
-    border: "none",
-    borderRadius: "0 4px 4px 0",
-    padding: "0 24px",
-    fontSize: "16px",
+    backgroundColor: '#fb2645',
+    color: 'white',
+    border: 'none',
+    borderRadius: '0 4px 4px 0',
+    padding: '0 24px',
+    fontSize: '16px',
     fontWeight: 500,
-    cursor: "pointer",
-    transition: "background-color 0.2s",
+    cursor: 'pointer',
+    transition: 'background-color 0.2s'
   },
   // Special states
   inputFocused: {
-    borderColor: "#fb2645",
+    borderColor: '#fb2645'
   },
   buttonHover: {
-    backgroundColor: "#e51e3a",
+    backgroundColor: '#e51e3a'
   },
   footer: {
-    marginTop: "40px",
-    fontSize: "14px",
-    color: "#999",
+    marginTop: '40px',
+    fontSize: '14px',
+    color: '#999'
   },
   // Banner
   banner: {
     fontFamily: '"Inter", sans-serif',
-    backgroundColor: "#000000",
-    color: "white",
-    textAlign: "center" as const,
-    padding: "12px 0px",
-    width: "100%",
-    position: "relative" as const,
+    backgroundColor: '#000000',
+    color: 'white',
+    textAlign: 'center' as const,
+    padding: '12px 0px',
+    width: '100%',
+    position: 'relative' as const,
     zIndex: 9999,
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
   },
   bannerText: {
     margin: 0,
-    fontSize: "15px",
-    color: "#fb2645",
+    fontSize: '15px',
+    color: '#fb2645'
   },
   bannerLink: {
-    color: "#fb2645",
+    color: '#fb2645',
     fontWeight: 600,
-    textDecoration: "underline",
-  },
-};
+    textDecoration: 'underline'
+  }
+}
 
 const App = (): JSX.Element => {
   // State to manage URL input
-  const [inputUrl, setInputUrl] = useState("");
-  const [inputFocused, setInputFocused] = useState(false);
-  const [buttonHovered, setButtonHovered] = useState(false);
+  const [inputUrl, setInputUrl] = useState('')
+  const [inputFocused, setInputFocused] = useState(false)
+  const [buttonHovered, setButtonHovered] = useState(false)
 
   // Handle URL from query parameters
-  const params = window.location.search;
+  const params = window.location.search
   const url =
-    params.split("=").length > 1
-      ? decodeURIComponent(params.split("=")[1])
-      : "";
+    params.split('=').length > 1
+      ? decodeURIComponent(params.split('=')[1])
+      : ''
 
   // Navigate to URL when form is submitted
   const handleSubmit = (e: React.FormEvent): void => {
-    e.preventDefault();
+    e.preventDefault()
     if (inputUrl.trim().length > 0) {
-      window.location.href = `?url=${encodeURIComponent(inputUrl.trim())}`;
+      window.location.href = `?url=${encodeURIComponent(inputUrl.trim())}`
     }
-  };
+  }
 
   // Banner component that shows when URL is present
   const Banner = (): JSX.Element => (
     <div style={styles.banner}>
       <p style={styles.bannerText}>
-        Powered by{" "}
+        Powered by{' '}
         <a
           href="https://rocketapi.net"
           target="_blank"
@@ -161,16 +161,16 @@ const App = (): JSX.Element => {
           style={styles.bannerLink}
         >
           Rocket
-        </a>{" "}
+        </a>{' '}
         - Build your backend with Rocket.
       </p>
     </div>
-  );
+  )
 
   // If no URL parameter is provided, show the landing page
   if (url.length === 0) {
     return (
-      <div style={{ minHeight: "100vh" }}>
+      <div style={{ minHeight: '100vh' }}>
         <div style={styles.container}>
           <header style={styles.header}>
             <div style={styles.branding}>
@@ -197,30 +197,30 @@ const App = (): JSX.Element => {
                     placeholder="https://example.com/openapi.json"
                     value={inputUrl}
                     onChange={(e) => {
-                      setInputUrl(e.target.value);
+                      setInputUrl(e.target.value)
                     }}
                     onFocus={() => {
-                      setInputFocused(true);
+                      setInputFocused(true)
                     }}
                     onBlur={() => {
-                      setInputFocused(false);
+                      setInputFocused(false)
                     }}
                     style={{
                       ...styles.input,
-                      ...(inputFocused ? styles.inputFocused : {}),
+                      ...(inputFocused ? styles.inputFocused : {})
                     }}
                   />
                   <button
                     type="submit"
                     onMouseEnter={() => {
-                      setButtonHovered(true);
+                      setButtonHovered(true)
                     }}
                     onMouseLeave={() => {
-                      setButtonHovered(false);
+                      setButtonHovered(false)
                     }}
                     style={{
                       ...styles.button,
-                      ...(buttonHovered ? styles.buttonHover : {}),
+                      ...(buttonHovered ? styles.buttonHover : {})
                     }}
                   >
                     View Docs
@@ -231,7 +231,7 @@ const App = (): JSX.Element => {
 
             <footer style={styles.footer}>
               <p>
-                Visit{" "}
+                Visit{' '}
                 <a
                   href="https://rocketapi.net"
                   target="_blank"
@@ -239,32 +239,32 @@ const App = (): JSX.Element => {
                   style={styles.link}
                 >
                   rocketapi.net
-                </a>{" "}
+                </a>{' '}
                 for information.
               </p>
-              <p style={{ marginTop: "10px", fontSize: "14px", color: "#666" }}>
+              <p style={{ marginTop: '10px', fontSize: '14px', color: '#666' }}>
                 Rocket - Build your backend with Rocket.
               </p>
             </footer>
           </main>
         </div>
       </div>
-    );
+    )
   }
 
   // If URL is provided, show the Redoc UI with banner
   return (
-    <div style={{ backgroundColor: "white", height: "100vh" }}>
+    <div style={{ backgroundColor: 'white', height: '100vh' }}>
       <Banner />
       <RedocStandalone
         specUrl={url}
         options={{
           nativeScrollbars: true,
-          theme: { colors: { primary: { main: "#fb2645" } } },
+          theme: { colors: { primary: { main: '#fb2645' } } }
         }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
